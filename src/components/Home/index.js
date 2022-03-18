@@ -6,6 +6,7 @@ function ImagesContainer({ images, lastImageElementRef }) {
     value: false,
     imgUrl: "",
   });
+  if(images.length>0) {
   return (
     <div className="grid sx:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sx:p-2 sm:p-3 md:p-4 px-5 md:px-50">
       {images.map((photo, index) => {
@@ -48,6 +49,9 @@ function ImagesContainer({ images, lastImageElementRef }) {
       )}
     </div>
   );
+      } else {
+        return <div><h1 className="text-center">No Images to show</h1></div>
+      }
 }
 
 export default ImagesContainer;

@@ -43,6 +43,7 @@ export const useHomeHook = () => {
 
   // Getting recent images
   useEffect(() => {
+    if(query ==="") {
     axios({
       method: "GET",
       url: "https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&",
@@ -62,7 +63,8 @@ export const useHomeHook = () => {
       .catch((e) => {
         setError(true);
       });
-  }, []);
+    }
+  }, [query]);
 
   // function to handle search queries
   function handleSearch(text) {
