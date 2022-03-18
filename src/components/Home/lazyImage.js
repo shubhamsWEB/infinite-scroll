@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useIntersection } from "../../hooks/useIntersectionObserver";
 import "./lazyStyles.css";
 
-const ImageRenderer = ({ url, thumb, width, height,handleonClick }) => {
+const ImageRenderer = ({ url, alt, width, height,handleonClick }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const imgRef = useRef();
@@ -27,13 +27,13 @@ const ImageRenderer = ({ url, thumb, width, height,handleonClick }) => {
           <img
             className={`image thumb ${isLoaded ? "isLoaded" : ""}`}
             src={url}
-            alt=""
+            alt={alt}
           />
           <img
             className={`image ${isLoaded ? "isLoaded" : ""}`}
             src={url}
             onLoad={handleOnLoad}
-            alt=""
+            alt={alt}
             onClick={()=> handleonClick({value:true,imgUrl:url})}
           />
         </>
