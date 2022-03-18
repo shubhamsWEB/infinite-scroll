@@ -7,7 +7,7 @@ function ImagesContainer({ images, lastImageElementRef }) {
     imgUrl: "",
   });
   return (
-    <div className="grid grid-cols-3 gap-4 p-4 px-20">
+    <div className="grid sx:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sx:p-2 sm:p-3 md:p-4 px-5 md:px-50">
       {images.map((photo, index) => {
         if (images.length === index + 1) {
           return (

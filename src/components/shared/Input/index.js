@@ -18,11 +18,11 @@ function Input({
   }, [searchQuerys]);
   return (
     <div className="flex justify-center items-center px-4 sm:px-6 lg:px-8">
-      <div className="relative">
+      <div className="relative w-full md:w-1/3">
         {" "}
         <input
           type="text"
-          className="h-10 w-96 pr-8 pl-5 rounded shadow focus:outline-none"
+          className="h-10 w-full pr-8 pl-5 rounded shadow focus:outline-none"
           placeholder={placeholder}
           onChange={(e) => onChangeHandler(e.target.value)}
           value={value}
