@@ -1,20 +1,31 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import useGetImages from "../../hooks/useGetSearchImages";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import axios from "axios";
 export const useHomeHook = () => {
   const [query, setQuery] = useState("");
   const [error, setError] = useState(false);
   const [photos, setPhotos] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(false);
+  const [searchQuery, setSearchQuery] = useLocalStorage("searchQuery", []);
   const [pageNumber, setPageNumber] = useState(1);
+
+  // fetching images
   const getImages = useCallback(() => {
-    return useGetImages(query, pageNumber, photos, setPhotos, error, setError,loading,hasMore,setLoading,setHasMore);
-  }, [query, pageNumber, photos, error]);
-  // Calling search function only if search query is not empty
-  // const { loading, hasMore } = query !=="" ? getImages() : {loading:false, hasMore:false};
-  getImages();
+    return useGetImages(
+      query,
+      pageNumber,
+      photos,
+      setPhotos,
+      error,
+      setError,
+      searchQuery,
+      setSearchQuery
+    );
+  }, [query, pageNumber, photos, error, searchQuery, setSearchQuery]);
+  const { loading, hasMore } = getImages();
+
+  // Attaching the last image element to the scroll event
   const observer = useRef();
   const lastImageElementRef = useCallback(
     (node) => {
@@ -29,6 +40,8 @@ export const useHomeHook = () => {
     },
     [hasMore, loading]
   );
+
+  // Getting recent images
   useEffect(() => {
     axios({
       method: "GET",
@@ -50,8 +63,10 @@ export const useHomeHook = () => {
         setError(true);
       });
   }, []);
-  function handleSearch(e) {
-    setQuery(e.target.value);
+
+  // function to handle search queries
+  function handleSearch(text) {
+    setQuery(text);
     setPageNumber(1);
   }
   return {
@@ -61,5 +76,7 @@ export const useHomeHook = () => {
     error,
     photos,
     query,
+    searchQuery,
+    setSearchQuery,
   };
 };

@@ -3,7 +3,9 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {animation: {
+      'fade': 'pulse 1s ease-in-out',
+    }},
   },
   plugins: [],
 }

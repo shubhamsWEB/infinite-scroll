@@ -1,27 +1,59 @@
 .image-container {
-	 background-color: #ccc;
-	 overflow: hidden;
-	 position: relative;
-	 max-width: 800px;
-	 margin: 20px auto;
+  background-color: #ccc;
+  overflow: hidden;
+  position: relative;
+  max-width: 800px;
+  margin: 20px auto;
 }
- .image {
-	 position: absolute;
-	 width: 100%;
-	 height: 100%;
+.image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.image.thumb {
+  opacity: 1;
+  filter: blur(10px);
+  /* transition: opacity 1s ease-out; */
+  position: absolute;
+  background-image: linear-gradient(
+    to left,
+    rgba(251, 251, 251, 0.05),
+    rgba(251, 251, 251, 0.3),
+    rgba(251, 251, 251, 0.6),
+    rgba(251, 251, 251, 0.3),
+    rgba(251, 251, 251, 0.05)
+  );
+  background-image: -moz-linear-gradient(
+    to left,
+    rgba(251, 251, 251, 0.05),
+    rgba(251, 251, 251, 0.3),
+    rgba(251, 251, 251, 0.6),
+    rgba(251, 251, 251, 0.3),
+    rgba(251, 251, 251, 0.05)
+  );
+  background-image: -webkit-linear-gradient(
+    to left,
+    rgba(251, 251, 251, 0.05),
+    rgba(251, 251, 251, 0.3),
+    rgba(251, 251, 251, 0.6),
+    rgba(251, 251, 251, 0.3),
+    rgba(251, 251, 251, 0.05)
+  );
+  animation: loading 1s infinite;
+}
+.image.thumb.isLoaded {
 	 opacity: 0;
 }
- .image.thumb {
-	 opacity: 1;
-	 filter: blur(10px);
-	 transition: opacity 1s ease-out;
-	 position: absolute;
+.image.isLoaded {
+  transition: opacity 1s ease-out;
+  opacity: 1;
 }
- .image.thumb.isLoaded {
-	 opacity: 0;
+@keyframes loading {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 100%;
+  }
 }
- .image.isLoaded {
-	 transition: opacity 1s ease-out;
-	 opacity: 1;
-}
- 

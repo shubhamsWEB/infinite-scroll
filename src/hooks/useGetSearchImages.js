@@ -1,11 +1,21 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
 import axios from "axios";
-export default function useGetSearchImages(query, pageNumber,photos,setPhotos,error,setError) {
+export default function useGetSearchImages(
+  query,
+  pageNumber,
+  photos,
+  setPhotos,
+  error,
+  setError,
+  searchQuery,
+  setSearchQuery
+) {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(false);
-  useEffect(()=> {
-    setPhotos([])
-  },[query])
+  useEffect(() => {
+    setPhotos([]);
+  }, [query, setPhotos]);
   useEffect(() => {
     setLoading(true);
     setError(false);
@@ -28,6 +38,7 @@ export default function useGetSearchImages(query, pageNumber,photos,setPhotos,er
           setPhotos((prevPhotos) => {
             return [...new Set([...prevPhotos, ...rsp.data.photos.photo])];
           });
+          setSearchQuery([...new Set([...searchQuery, query])]);
           setHasMore(rsp.data.photos.photo.length > 0);
         }
         setLoading(false);
