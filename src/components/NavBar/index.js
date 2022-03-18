@@ -26,7 +26,7 @@ function Navbar({
       } p-6 h-${isNavScrolled ? 20 : 40} z-50`}
     >
       <div
-        className={`text-4xl mb-3 text-white transition duration-700 ease-in-out animate-fade  ${
+        className={`text-4xl mb-3 text-white ${
           isNavScrolled ? "hidden" : ""
         }`}
       >
